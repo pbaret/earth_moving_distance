@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
     // 4. Init the points for K-Mean
     int nb_pixel = img.rows * img.cols;
-    colorLAB pixels[nb_pixel];
+    colorLAB *pixels = new colorLAB[nb_pixel];
 
     for (int l = 0; l < img.rows; l++)
     {
@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
     }
 
     // 7. Build for signature image
-    cv::Mat test(80,800,CV_8UC3);
+    cv::Mat test(80,800,CV_8UC3,cv::Scalar(0,0,0));
     for (int l = 0; l < test.rows; l++)
     {
         for (int c = 0; c < test.cols; c++)
@@ -174,6 +174,7 @@ int main(int argc, char *argv[])
     cv::imshow("test",test);
     cv::waitKey(0);
 
+    delete [] pixels;
     
     return 0;
 }
